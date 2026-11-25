@@ -53,6 +53,7 @@ export function createCurtainGeometry(width, height) {
 export function updateCurtains(curtains, elapsed) {
   const meshes = [curtains.leftCurtain, curtains.rightCurtain];
   const height = curtains.panelHeight || 1;
+  const intensity = curtains.motionState?.pullIntensity || 0;
 
   for (let m = 0; m < meshes.length; m++) {
     const mesh = meshes[m];
@@ -66,12 +67,16 @@ export function updateCurtains(curtains, elapsed) {
     const phaseOffset = m === 0 ? 0 : 0.8;
     const count = pos.count;
 
+    const waveSpeed = 1.5 + intensity * 3.5;
+    const baseWeight = 0.035 + intensity * 0.12;
+
     for (let i = 0; i < count; i++) {
+      const x = pos.getX(i);
       const y = pos.getY(i);
       const normalizedY = (y + height / 2) / height;
-      const swayWeight = Math.pow(Math.max(0, 1 - normalizedY), 1.5) * 0.035;
-      const sway = Math.sin(elapsed * 1.5 + y * 0.8 + phaseOffset) * swayWeight;
-      pos.setZ(i, restZ[i] + sway);
+      const swayWeight = Math.pow(Math.max(0, 1 - normalizedY), 1.5) * baseWeight;
+      const billow = Math.sin(elapsed * waveSpeed + y * 1.2 + x * 0.5 + phaseOffset) * swayWeight;
+      pos.setZ(i, restZ[i] + billow);
     }
 
     pos.needsUpdate = true;
@@ -100,11 +105,17 @@ export function createCurtains(scene, camera) {
   rightCurtain.position.set(panelWidth / 2 - 0.08, 0, 0.02);
   scene.add(rightCurtain);
 
+  const motionState = { pullIntensity: 0 };
+
   const curtainsData = {
     leftCurtain,
     rightCurtain,
     panelWidth,
     panelHeight,
+    motionState,
+    setOpeningIntensity: (val) => {
+      motionState.pullIntensity = val;
+    },
     update: (elapsed) => updateCurtains(curtainsData, elapsed),
   };
 

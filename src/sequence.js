@@ -70,6 +70,19 @@ export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) 
 
   const curtainStartTime = 0.67;
 
+  if (curtains.motionState) {
+    tl.to(
+      curtains.motionState,
+      { pullIntensity: 1.0, duration: 0.8, ease: 'power2.out' },
+      curtainStartTime
+    );
+    tl.to(
+      curtains.motionState,
+      { pullIntensity: 0, duration: 1.3, ease: 'power2.inOut' },
+      curtainStartTime + 0.8
+    );
+  }
+
   tl.to(
     curtains.leftCurtain.position,
     {
