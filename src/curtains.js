@@ -51,5 +51,18 @@ export function createCurtainGeometry(width, height) {
 }
 
 export function createCurtains(scene, camera) {
-  return {};
+  const viewport = getViewportSizeAtZ(camera, 0);
+  const panelWidth = viewport.width * 0.58;
+  const panelHeight = viewport.height * 1.15;
+
+  const velvetMaterial = createVelvetMaterial();
+
+  const leftGeometry = createCurtainGeometry(panelWidth, panelHeight);
+  const leftCurtain = new THREE.Mesh(leftGeometry, velvetMaterial);
+  leftCurtain.castShadow = true;
+  leftCurtain.receiveShadow = true;
+  leftCurtain.position.set(-panelWidth / 2, 0, 0);
+  scene.add(leftCurtain);
+
+  return { leftCurtain, panelWidth, panelHeight };
 }
