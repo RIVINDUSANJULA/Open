@@ -36,6 +36,28 @@ export function createBladeGeometry() {
   return geometry;
 }
 
+export function createHandleGroup(goldMat = goldMaterial, isUpper = true) {
+  const handleGroup = new THREE.Group();
+
+  const shankGeometry = new THREE.CylinderGeometry(0.022, 0.024, 0.32, 16);
+  const shank = new THREE.Mesh(shankGeometry, goldMat);
+  shank.castShadow = true;
+  shank.receiveShadow = true;
+  shank.position.set(0.15, isUpper ? 0.06 : -0.06, 0);
+  shank.rotation.z = isUpper ? -Math.PI / 5 : Math.PI / 5;
+  handleGroup.add(shank);
+
+  const ringGeometry = new THREE.TorusGeometry(0.12, 0.024, 16, 32);
+  const ring = new THREE.Mesh(ringGeometry, goldMat);
+  ring.castShadow = true;
+  ring.receiveShadow = true;
+  ring.position.set(0.38, isUpper ? 0.14 : -0.14, 0);
+  ring.scale.set(1.15, 0.9, 1.0);
+  handleGroup.add(ring);
+
+  return handleGroup;
+}
+
 export function createScissors(scene, camera, onSnip) {
   return {};
 }
