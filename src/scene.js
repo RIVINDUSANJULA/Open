@@ -29,3 +29,16 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
+
+const clock = new THREE.Clock();
+
+export function startLoop(onTick) {
+  function loop() {
+    requestAnimationFrame(loop);
+    const elapsed = clock.getElapsedTime();
+    const delta = clock.getDelta();
+    onTick?.(elapsed, delta);
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(loop);
+}
