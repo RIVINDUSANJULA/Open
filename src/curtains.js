@@ -61,14 +61,14 @@ export function createCurtains(scene, camera) {
   const leftCurtain = new THREE.Mesh(leftGeometry, velvetMaterial);
   leftCurtain.castShadow = true;
   leftCurtain.receiveShadow = true;
-  leftCurtain.position.set(-panelWidth / 2, 0, 0);
+  leftCurtain.position.set(-panelWidth / 2 + 0.08, 0, 0);
   scene.add(leftCurtain);
 
   const rightGeometry = createCurtainGeometry(panelWidth, panelHeight);
   const rightCurtain = new THREE.Mesh(rightGeometry, velvetMaterial);
   rightCurtain.castShadow = true;
   rightCurtain.receiveShadow = true;
-  rightCurtain.position.set(panelWidth / 2, 0, 0);
+  rightCurtain.position.set(panelWidth / 2 - 0.08, 0, 0.02);
   scene.add(rightCurtain);
 
   return { leftCurtain, rightCurtain, panelWidth, panelHeight };
