@@ -96,7 +96,8 @@ export function createScissors(scene, camera, onSnip) {
   hitTarget.position.set(-0.15, 0, 0);
   scissorsGroup.add(hitTarget);
 
-  scissorsGroup.position.set(0.45, -0.05, 0.95);
+  const basePosition = new THREE.Vector3(0.45, -0.05, 0.95);
+  scissorsGroup.position.copy(basePosition);
   scissorsGroup.rotation.set(0.05, -0.12, -0.06);
 
   topHalf.rotation.z = 0.28;
@@ -129,12 +130,38 @@ export function createScissors(scene, camera, onSnip) {
     }
   });
 
+  window.addEventListener('pointerdown', (event) => {
+    if (hasSnipped) return;
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(pointer, camera);
+    const intersects = raycaster.intersectObject(hitTarget, false);
+    if (intersects.length > 0) {
+      hasSnipped = true;
+      isHovered = false;
+      document.body.style.cursor = 'default';
+      onSnip?.();
+    }
+  });
+
+  function update(elapsed) {
+    if (hasSnipped) return;
+
+    const bobY = Math.sin(elapsed * 2.2) * 0.02;
+    const bobRotZ = Math.sin(elapsed * 1.6) * 0.015;
+    scissorsGroup.position.y = basePosition.y + bobY;
+    scissorsGroup.rotation.z = -0.06 + bobRotZ;
+
+    const targetScale = isHovered ? 1.08 : 1.0;
+    scissorsGroup.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+  }
+
   return {
     group: scissorsGroup,
     topHalf,
     bottomHalf,
-    pivotScrew,
-    hitTarget,
-    isHovered: () => isHovered,
+    update,
+    isSnipped: () => hasSnipped,
   };
 }
