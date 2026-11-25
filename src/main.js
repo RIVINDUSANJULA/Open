@@ -4,12 +4,14 @@ import { setupLights } from './lights.js';
 import { createCurtains } from './curtains.js';
 import { createRibbon } from './ribbon.js';
 import { createScissors } from './scissors.js';
+import { playOpeningSequence } from './sequence.js';
 
 setupLights(scene);
 const curtains = createCurtains(scene, camera);
 const ribbon = createRibbon(scene, camera);
+
 const scissors = createScissors(scene, camera, () => {
-  console.log('snip triggered');
+  playOpeningSequence({ scissors, ribbon, curtains });
 });
 
 startLoop((elapsed) => {
