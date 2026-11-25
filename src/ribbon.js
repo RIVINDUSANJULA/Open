@@ -30,15 +30,33 @@ export function createRibbon(scene, camera) {
 
   const leftGeometry = new THREE.PlaneGeometry(halfWidth, ribbonHeight, 48, 4);
   leftGeometry.translate(-halfWidth / 2, 0, 0);
-  leftGeometry.userData.basePositions = new Float32Array(leftGeometry.attributes.position.array);
+
+  const rightGeometry = new THREE.PlaneGeometry(halfWidth, ribbonHeight, 48, 4);
+  rightGeometry.translate(halfWidth / 2, 0, 0);
+
+  const geometries = [leftGeometry, rightGeometry];
+  for (const geom of geometries) {
+    const pos = geom.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i);
+      const y = pos.getY(i);
+      const z = pos.getZ(i);
+
+      const u = Math.min(1, Math.abs(x) / halfWidth);
+      const sag = -0.04 * (1 - u * u);
+      const ripple = Math.sin(x * 6.0) * 0.008;
+
+      pos.setY(i, y + sag);
+      pos.setZ(i, z + ripple);
+    }
+    pos.needsUpdate = true;
+    geom.computeVertexNormals();
+    geom.userData.basePositions = new Float32Array(pos.array);
+  }
 
   const leftRibbon = new THREE.Mesh(leftGeometry, satinMaterial);
   leftRibbon.castShadow = true;
   leftRibbon.receiveShadow = true;
-
-  const rightGeometry = new THREE.PlaneGeometry(halfWidth, ribbonHeight, 48, 4);
-  rightGeometry.translate(halfWidth / 2, 0, 0);
-  rightGeometry.userData.basePositions = new Float32Array(rightGeometry.attributes.position.array);
 
   const rightRibbon = new THREE.Mesh(rightGeometry, satinMaterial);
   rightRibbon.castShadow = true;
