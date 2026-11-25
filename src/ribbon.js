@@ -22,5 +22,19 @@ export function createSatinMaterial() {
 }
 
 export function createRibbon(scene, camera) {
-  return {};
+  const totalWidth = getVisibleWidthAtZ(camera, 0.65) * 1.15;
+  const halfWidth = totalWidth / 2;
+  const ribbonHeight = 0.24;
+
+  const satinMaterial = createSatinMaterial();
+
+  const leftGeometry = new THREE.PlaneGeometry(halfWidth, ribbonHeight, 48, 4);
+  leftGeometry.translate(-halfWidth / 2, 0, 0);
+  leftGeometry.userData.basePositions = new Float32Array(leftGeometry.attributes.position.array);
+
+  const leftRibbon = new THREE.Mesh(leftGeometry, satinMaterial);
+  leftRibbon.castShadow = true;
+  leftRibbon.receiveShadow = true;
+
+  return { leftRibbon, totalWidth, halfWidth, ribbonHeight };
 }
