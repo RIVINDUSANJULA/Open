@@ -43,5 +43,30 @@ export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) 
     0.22
   );
 
+  tl.to(
+    scissors.group.position,
+    {
+      x: 2.2,
+      y: -2.8,
+      z: 1.5,
+      duration: 0.65,
+      ease: 'power2.in',
+      onComplete: () => {
+        scissors.group.visible = false;
+      },
+    },
+    0.30
+  );
+  tl.to(
+    scissors.group.rotation,
+    {
+      z: -0.4,
+      x: 0.2,
+      duration: 0.65,
+      ease: 'power2.in',
+    },
+    0.30
+  );
+
   return tl;
 }
