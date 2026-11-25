@@ -1,3 +1,4 @@
 import './style.css';
+import { startLoop } from './scene.js';
 
-console.log('stage ready');
+startLoop();
