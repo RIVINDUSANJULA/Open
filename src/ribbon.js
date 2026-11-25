@@ -68,5 +68,45 @@ export function createRibbon(scene, camera) {
   ribbonGroup.position.set(0, 0, 0.65);
   scene.add(ribbonGroup);
 
-  return { group: ribbonGroup, leftRibbon, rightRibbon, totalWidth, halfWidth, ribbonHeight };
+  let isCut = false;
+
+  function update(elapsed) {
+    if (isCut) return;
+
+    const meshes = [leftRibbon, rightRibbon];
+    for (let m = 0; m < meshes.length; m++) {
+      const mesh = meshes[m];
+      const geom = mesh.geometry;
+      const pos = geom.attributes.position;
+      const base = geom.userData.basePositions;
+      if (!base) continue;
+
+      for (let i = 0; i < pos.count; i++) {
+        const bx = base[i * 3];
+        const by = base[i * 3 + 1];
+        const bz = base[i * 3 + 2];
+
+        const waveY = Math.sin(elapsed * 2.0 + bx * 1.5) * 0.008;
+        const waveZ = Math.cos(elapsed * 1.8 + bx * 1.2) * 0.01;
+
+        pos.setY(i, by + waveY);
+        pos.setZ(i, bz + waveZ);
+      }
+      pos.needsUpdate = true;
+      geom.computeVertexNormals();
+    }
+  }
+
+  return {
+    group: ribbonGroup,
+    leftRibbon,
+    rightRibbon,
+    totalWidth,
+    halfWidth,
+    ribbonHeight,
+    setCut: (val) => {
+      isCut = val;
+    },
+    update,
+  };
 }
