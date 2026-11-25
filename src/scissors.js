@@ -89,5 +89,13 @@ export function createScissors(scene, camera, onSnip) {
   scissorsGroup.add(bottomHalf);
   scissorsGroup.add(pivotScrew);
 
+  scissorsGroup.position.set(0.45, -0.05, 0.95);
+  scissorsGroup.rotation.set(0.05, -0.12, -0.06);
+
+  topHalf.rotation.z = 0.28;
+  bottomHalf.rotation.z = -0.28;
+
+  scene.add(scissorsGroup);
+
   return { group: scissorsGroup, topHalf, bottomHalf, pivotScrew };
 }
