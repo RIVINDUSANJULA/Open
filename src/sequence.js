@@ -68,5 +68,45 @@ export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) 
     0.30
   );
 
+  const curtainStartTime = 0.67;
+
+  tl.to(
+    curtains.leftCurtain.position,
+    {
+      x: -curtains.panelWidth * 1.18,
+      duration: 2.1,
+      ease: 'power3.inOut',
+    },
+    curtainStartTime
+  );
+  tl.to(
+    curtains.leftCurtain.scale,
+    {
+      x: 0.28,
+      duration: 2.1,
+      ease: 'power3.inOut',
+    },
+    curtainStartTime
+  );
+
+  tl.to(
+    curtains.rightCurtain.position,
+    {
+      x: curtains.panelWidth * 1.18,
+      duration: 2.1,
+      ease: 'power3.inOut',
+    },
+    curtainStartTime
+  );
+  tl.to(
+    curtains.rightCurtain.scale,
+    {
+      x: 0.28,
+      duration: 2.1,
+      ease: 'power3.inOut',
+    },
+    curtainStartTime
+  );
+
   return tl;
 }
