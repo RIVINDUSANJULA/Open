@@ -32,14 +32,22 @@ window.addEventListener('resize', () => {
 });
 
 const clock = new THREE.Clock();
+let rafId = null;
 
 export function startLoop(onTick) {
   function loop() {
-    requestAnimationFrame(loop);
+    rafId = requestAnimationFrame(loop);
     const elapsed = clock.getElapsedTime();
     const delta = clock.getDelta();
     onTick?.(elapsed, delta);
     renderer.render(scene, camera);
   }
-  requestAnimationFrame(loop);
+  rafId = requestAnimationFrame(loop);
+}
+
+export function stopLoop() {
+  if (rafId !== null) {
+    cancelAnimationFrame(rafId);
+    rafId = null;
+  }
 }

@@ -1,5 +1,6 @@
 import gsap from 'gsap';
 import { playSnipSound, playCurtainWhoosh } from './audio.js';
+import { stopLoop } from './scene.js';
 
 export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) {
   const tl = gsap.timeline({ onComplete });
@@ -134,6 +135,20 @@ export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) 
     tl.call(() => {
       canvas.style.pointerEvents = 'none';
     }, null, curtainStartTime + 1.8);
+
+    tl.to(
+      canvas,
+      {
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.out',
+        onComplete: () => {
+          stopLoop();
+          canvas.style.display = 'none';
+        },
+      },
+      curtainStartTime + 2.1
+    );
   }
 
   return tl;
