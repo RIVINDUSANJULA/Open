@@ -36,5 +36,13 @@ export function createRibbon(scene, camera) {
   leftRibbon.castShadow = true;
   leftRibbon.receiveShadow = true;
 
-  return { leftRibbon, totalWidth, halfWidth, ribbonHeight };
+  const rightGeometry = new THREE.PlaneGeometry(halfWidth, ribbonHeight, 48, 4);
+  rightGeometry.translate(halfWidth / 2, 0, 0);
+  rightGeometry.userData.basePositions = new Float32Array(rightGeometry.attributes.position.array);
+
+  const rightRibbon = new THREE.Mesh(rightGeometry, satinMaterial);
+  rightRibbon.castShadow = true;
+  rightRibbon.receiveShadow = true;
+
+  return { leftRibbon, rightRibbon, totalWidth, halfWidth, ribbonHeight };
 }
