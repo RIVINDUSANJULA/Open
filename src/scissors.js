@@ -59,5 +59,35 @@ export function createHandleGroup(goldMat = goldMaterial, isUpper = true) {
 }
 
 export function createScissors(scene, camera, onSnip) {
-  return {};
+  const topHalf = new THREE.Group();
+  const topBlade = new THREE.Mesh(createBladeGeometry(), steelMaterial);
+  topBlade.castShadow = true;
+  topBlade.receiveShadow = true;
+  const topHandle = createHandleGroup(goldMaterial, true);
+  topHalf.add(topBlade);
+  topHalf.add(topHandle);
+
+  const bottomHalf = new THREE.Group();
+  const bottomBlade = new THREE.Mesh(createBladeGeometry(), steelMaterial);
+  bottomBlade.castShadow = true;
+  bottomBlade.receiveShadow = true;
+  bottomBlade.scale.y = -1;
+  const bottomHandle = createHandleGroup(goldMaterial, false);
+  bottomHalf.add(bottomBlade);
+  bottomHalf.add(bottomHandle);
+  bottomHalf.position.z = -0.03;
+
+  const screwGeometry = new THREE.CylinderGeometry(0.045, 0.045, 0.065, 24);
+  screwGeometry.rotateX(Math.PI / 2);
+  const pivotScrew = new THREE.Mesh(screwGeometry, goldMaterial);
+  pivotScrew.castShadow = true;
+  pivotScrew.receiveShadow = true;
+  pivotScrew.position.set(0, 0, -0.015);
+
+  const scissorsGroup = new THREE.Group();
+  scissorsGroup.add(topHalf);
+  scissorsGroup.add(bottomHalf);
+  scissorsGroup.add(pivotScrew);
+
+  return { group: scissorsGroup, topHalf, bottomHalf, pivotScrew };
 }
