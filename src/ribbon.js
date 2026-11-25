@@ -62,5 +62,11 @@ export function createRibbon(scene, camera) {
   rightRibbon.castShadow = true;
   rightRibbon.receiveShadow = true;
 
-  return { leftRibbon, rightRibbon, totalWidth, halfWidth, ribbonHeight };
+  const ribbonGroup = new THREE.Group();
+  ribbonGroup.add(leftRibbon);
+  ribbonGroup.add(rightRibbon);
+  ribbonGroup.position.set(0, 0, 0.65);
+  scene.add(ribbonGroup);
+
+  return { group: ribbonGroup, leftRibbon, rightRibbon, totalWidth, halfWidth, ribbonHeight };
 }
