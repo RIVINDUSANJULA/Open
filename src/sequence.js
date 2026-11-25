@@ -121,5 +121,12 @@ export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) 
     curtainStartTime
   );
 
+  const canvas = document.querySelector('#webgl-canvas');
+  if (canvas) {
+    tl.call(() => {
+      canvas.style.pointerEvents = 'none';
+    }, null, curtainStartTime + 1.8);
+  }
+
   return tl;
 }
