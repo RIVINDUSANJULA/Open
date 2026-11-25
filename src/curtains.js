@@ -8,6 +8,18 @@ export function getViewportSizeAtZ(camera, z = 0) {
   return { width, height };
 }
 
+export function createVelvetMaterial() {
+  return new THREE.MeshPhysicalMaterial({
+    color: 0x7a0914,
+    roughness: 0.88,
+    metalness: 0.04,
+    sheen: 1.0,
+    sheenRoughness: 0.55,
+    sheenColor: new THREE.Color(0xd93848),
+    side: THREE.DoubleSide,
+  });
+}
+
 export function createCurtains(scene, camera) {
   return {};
 }
