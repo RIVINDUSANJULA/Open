@@ -20,6 +20,12 @@ export function createVelvetMaterial() {
   });
 }
 
+export function createCurtainGeometry(width, height) {
+  const geometry = new THREE.PlaneGeometry(width, height, 64, 48);
+  geometry.userData.basePositions = new Float32Array(geometry.attributes.position.array);
+  return geometry;
+}
+
 export function createCurtains(scene, camera) {
   return {};
 }
