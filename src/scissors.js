@@ -89,6 +89,13 @@ export function createScissors(scene, camera, onSnip) {
   scissorsGroup.add(bottomHalf);
   scissorsGroup.add(pivotScrew);
 
+  const hitTarget = new THREE.Mesh(
+    new THREE.SphereGeometry(0.75, 16, 16),
+    new THREE.MeshBasicMaterial({ visible: false })
+  );
+  hitTarget.position.set(-0.15, 0, 0);
+  scissorsGroup.add(hitTarget);
+
   scissorsGroup.position.set(0.45, -0.05, 0.95);
   scissorsGroup.rotation.set(0.05, -0.12, -0.06);
 
@@ -97,5 +104,5 @@ export function createScissors(scene, camera, onSnip) {
 
   scene.add(scissorsGroup);
 
-  return { group: scissorsGroup, topHalf, bottomHalf, pivotScrew };
+  return { group: scissorsGroup, topHalf, bottomHalf, pivotScrew, hitTarget };
 }
