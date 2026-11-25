@@ -11,7 +11,14 @@ const curtains = createCurtains(scene, camera);
 const ribbon = createRibbon(scene, camera);
 
 const scissors = createScissors(scene, camera, () => {
-  playOpeningSequence({ scissors, ribbon, curtains });
+  playOpeningSequence({
+    scissors,
+    ribbon,
+    curtains,
+    onComplete: () => {
+      window.location.href = 'https://rivindusanjula.vercel.app/';
+    },
+  });
 });
 
 startLoop((elapsed) => {
