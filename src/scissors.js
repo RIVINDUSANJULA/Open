@@ -110,7 +110,7 @@ export function createScissors(scene, camera, onSnip) {
   let isHovered = false;
   let hasSnipped = false;
 
-  window.addEventListener('pointermove', (event) => {
+  const onPointerMove = (event) => {
     if (hasSnipped) return;
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -128,7 +128,13 @@ export function createScissors(scene, camera, onSnip) {
         document.body.style.cursor = 'default';
       }
     }
-  });
+  };
+
+  const cleanupListeners = () => {
+    window.removeEventListener('keydown', onKeyDown);
+    window.removeEventListener('pointermove', onPointerMove);
+    window.removeEventListener('pointerdown', onPointerDown);
+  };
 
   const onKeyDown = (event) => {
     if (hasSnipped) return;
@@ -137,14 +143,12 @@ export function createScissors(scene, camera, onSnip) {
       hasSnipped = true;
       isHovered = false;
       document.body.style.cursor = 'default';
-      window.removeEventListener('keydown', onKeyDown);
+      cleanupListeners();
       onSnip?.();
     }
   };
 
-  window.addEventListener('keydown', onKeyDown);
-
-  window.addEventListener('pointerdown', (event) => {
+  const onPointerDown = (event) => {
     if (hasSnipped) return;
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -155,10 +159,14 @@ export function createScissors(scene, camera, onSnip) {
       hasSnipped = true;
       isHovered = false;
       document.body.style.cursor = 'default';
-      window.removeEventListener('keydown', onKeyDown);
+      cleanupListeners();
       onSnip?.();
     }
-  });
+  };
+
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('keydown', onKeyDown);
+  window.addEventListener('pointerdown', onPointerDown);
 
   function update(elapsed) {
     if (hasSnipped) return;
