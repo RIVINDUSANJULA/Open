@@ -1,6 +1,11 @@
 import './style.css';
-import { scene, startLoop } from './scene.js';
+import { scene, camera, startLoop } from './scene.js';
 import { setupLights } from './lights.js';
+import { createCurtains } from './curtains.js';
 
 setupLights(scene);
-startLoop();
+const curtains = createCurtains(scene, camera);
+
+startLoop((elapsed) => {
+  curtains.update(elapsed);
+});
