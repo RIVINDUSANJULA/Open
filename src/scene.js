@@ -3,7 +3,7 @@ import * as THREE from 'three';
 export const scene = new THREE.Scene();
 
 export const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-camera.position.set(0, 0, 5);
+camera.position.set(0, 0, window.innerWidth < window.innerHeight ? 6.2 : 5);
 scene.add(camera);
 
 const canvas = document.querySelector('#webgl-canvas');
@@ -25,6 +25,7 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
+  camera.position.z = window.innerWidth < window.innerHeight ? 6.2 : 5;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
