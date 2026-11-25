@@ -104,5 +104,37 @@ export function createScissors(scene, camera, onSnip) {
 
   scene.add(scissorsGroup);
 
-  return { group: scissorsGroup, topHalf, bottomHalf, pivotScrew, hitTarget };
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2(-999, -999);
+  let isHovered = false;
+  let hasSnipped = false;
+
+  window.addEventListener('pointermove', (event) => {
+    if (hasSnipped) return;
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(pointer, camera);
+    const intersects = raycaster.intersectObject(hitTarget, false);
+    if (intersects.length > 0) {
+      if (!isHovered) {
+        isHovered = true;
+        document.body.style.cursor = 'pointer';
+      }
+    } else {
+      if (isHovered) {
+        isHovered = false;
+        document.body.style.cursor = 'default';
+      }
+    }
+  });
+
+  return {
+    group: scissorsGroup,
+    topHalf,
+    bottomHalf,
+    pivotScrew,
+    hitTarget,
+    isHovered: () => isHovered,
+  };
 }
