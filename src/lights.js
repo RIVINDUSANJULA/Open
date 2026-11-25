@@ -19,5 +19,13 @@ export function setupLights(scene) {
   scene.add(spotLight);
   scene.add(spotLight.target);
 
-  return { ambientLight, hemiLight, spotLight };
+  const leftRim = new THREE.PointLight(0xffb88c, 8, 15, 2);
+  leftRim.position.set(-4.5, 1.5, 3.5);
+  scene.add(leftRim);
+
+  const rightRim = new THREE.PointLight(0xffd2a6, 8, 15, 2);
+  rightRim.position.set(4.5, 1.5, 3.5);
+  scene.add(rightRim);
+
+  return { ambientLight, hemiLight, spotLight, leftRim, rightRim };
 }
