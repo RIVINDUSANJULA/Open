@@ -23,6 +23,30 @@ export function createVelvetMaterial() {
 export function createCurtainGeometry(width, height) {
   const geometry = new THREE.PlaneGeometry(width, height, 64, 48);
   geometry.userData.basePositions = new Float32Array(geometry.attributes.position.array);
+
+  const pos = geometry.attributes.position;
+  const count = pos.count;
+  const restZ = new Float32Array(count);
+
+  for (let i = 0; i < count; i++) {
+    const x = pos.getX(i);
+    const y = pos.getY(i);
+
+    const normalizedY = (y + height / 2) / height;
+    const topTaper = 0.55 + 0.45 * Math.sin((1 - normalizedY) * Math.PI * 0.5);
+
+    const primaryFold = Math.sin((x / width) * Math.PI * 14) * 0.14;
+    const secondaryRipple = Math.sin((x / width) * Math.PI * 28 + 0.4) * 0.04;
+    const z = (primaryFold + secondaryRipple) * topTaper;
+
+    pos.setZ(i, z);
+    restZ[i] = z;
+  }
+
+  geometry.userData.restZ = restZ;
+  pos.needsUpdate = true;
+  geometry.computeVertexNormals();
+
   return geometry;
 }
 
