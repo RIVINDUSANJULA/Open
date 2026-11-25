@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { playSnipSound, playCurtainWhoosh } from './audio.js';
 
 export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) {
   const tl = gsap.timeline({ onComplete });
@@ -19,7 +20,10 @@ export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) 
     0
   );
 
-  tl.call(() => ribbon.setCut(true), null, 0.22);
+  tl.call(() => {
+    ribbon.setCut(true);
+    playSnipSound();
+  }, null, 0.22);
 
   tl.to(
     ribbon.leftRibbon.position,
@@ -69,6 +73,10 @@ export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) 
   );
 
   const curtainStartTime = 0.67;
+
+  tl.call(() => {
+    playCurtainWhoosh();
+  }, null, curtainStartTime);
 
   if (curtains.motionState) {
     tl.to(
