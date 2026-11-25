@@ -130,6 +130,20 @@ export function createScissors(scene, camera, onSnip) {
     }
   });
 
+  const onKeyDown = (event) => {
+    if (hasSnipped) return;
+    if (event.code === 'Enter' || event.code === 'Space') {
+      event.preventDefault();
+      hasSnipped = true;
+      isHovered = false;
+      document.body.style.cursor = 'default';
+      window.removeEventListener('keydown', onKeyDown);
+      onSnip?.();
+    }
+  };
+
+  window.addEventListener('keydown', onKeyDown);
+
   window.addEventListener('pointerdown', (event) => {
     if (hasSnipped) return;
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -141,6 +155,7 @@ export function createScissors(scene, camera, onSnip) {
       hasSnipped = true;
       isHovered = false;
       document.body.style.cursor = 'default';
+      window.removeEventListener('keydown', onKeyDown);
       onSnip?.();
     }
   });
