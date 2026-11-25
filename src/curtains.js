@@ -50,6 +50,35 @@ export function createCurtainGeometry(width, height) {
   return geometry;
 }
 
+export function updateCurtains(curtains, elapsed) {
+  const meshes = [curtains.leftCurtain, curtains.rightCurtain];
+  const height = curtains.panelHeight || 1;
+
+  for (let m = 0; m < meshes.length; m++) {
+    const mesh = meshes[m];
+    if (!mesh || !mesh.geometry) continue;
+
+    const geometry = mesh.geometry;
+    const pos = geometry.attributes.position;
+    const restZ = geometry.userData.restZ;
+    if (!restZ) continue;
+
+    const phaseOffset = m === 0 ? 0 : 0.8;
+    const count = pos.count;
+
+    for (let i = 0; i < count; i++) {
+      const y = pos.getY(i);
+      const normalizedY = (y + height / 2) / height;
+      const swayWeight = Math.pow(Math.max(0, 1 - normalizedY), 1.5) * 0.035;
+      const sway = Math.sin(elapsed * 1.5 + y * 0.8 + phaseOffset) * swayWeight;
+      pos.setZ(i, restZ[i] + sway);
+    }
+
+    pos.needsUpdate = true;
+    geometry.computeVertexNormals();
+  }
+}
+
 export function createCurtains(scene, camera) {
   const viewport = getViewportSizeAtZ(camera, 0);
   const panelWidth = viewport.width * 0.58;
@@ -71,5 +100,13 @@ export function createCurtains(scene, camera) {
   rightCurtain.position.set(panelWidth / 2 - 0.08, 0, 0.02);
   scene.add(rightCurtain);
 
-  return { leftCurtain, rightCurtain, panelWidth, panelHeight };
+  const curtainsData = {
+    leftCurtain,
+    rightCurtain,
+    panelWidth,
+    panelHeight,
+    update: (elapsed) => updateCurtains(curtainsData, elapsed),
+  };
+
+  return curtainsData;
 }
