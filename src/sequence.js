@@ -151,5 +151,21 @@ export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) 
     );
   }
 
+  const siteFrame = document.querySelector('#site-frame');
+  if (siteFrame) {
+    tl.to(
+      siteFrame,
+      {
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out',
+        onStart: () => {
+          siteFrame.style.pointerEvents = 'auto';
+        },
+      },
+      curtainStartTime + 1.8
+    );
+  }
+
   return tl;
 }
