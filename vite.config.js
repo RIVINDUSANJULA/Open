@@ -3,13 +3,13 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   server: {
     host: 'localhost',
-    port: 3000,
+    port: 5173,
     strictPort: true,
-    open: true,
+    open: false,
   },
   preview: {
     host: 'localhost',
-    port: 3000,
+    port: 5173,
     strictPort: true,
   },
 });
