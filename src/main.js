@@ -16,7 +16,7 @@ const scissors = createScissors(scene, camera, () => {
     ribbon,
     curtains,
     onComplete: () => {
-      window.location.href = 'https://rivindusanjula.vercel.app/';
+      window.location.href = 'https://iitstudentunion.vercel.app';
     },
   });
 });
