@@ -1,6 +1,6 @@
 # Grand Opening — Rivindu Sanjula
 
-A high-fidelity Three.js realistic red velvet curtain and ribbon-cutting ceremonial launch experience that reveals [rivindusanjula.vercel.app](https://rivindusanjula.vercel.app/).
+A high-fidelity Three.js realistic red velvet curtain and ribbon-cutting ceremonial launch experience that reveals [localhost:3000](http://localhost:3000).
 
 ## Tech Stack
 
