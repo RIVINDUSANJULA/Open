@@ -28,7 +28,7 @@ npm install
 
 ### Development Server
 
-Run the development server (served at `http://localhost:3000`):
+Run the development server (served at `http://localhost:5173/`):
 
 ```bash
 npm run dev
