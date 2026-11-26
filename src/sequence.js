@@ -160,6 +160,7 @@ export function playOpeningSequence({ scissors, ribbon, curtains, onComplete }) 
         duration: 0.6,
         ease: 'power2.out',
         onStart: () => {
+          siteFrame.style.visibility = 'visible';
           siteFrame.style.pointerEvents = 'auto';
         },
       },
