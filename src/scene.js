@@ -34,6 +34,10 @@ window.addEventListener('resize', () => {
 const clock = new THREE.Clock();
 let rafId = null;
 
+export function renderOnce() {
+  renderer.render(scene, camera);
+}
+
 export function startLoop(onTick) {
   function loop() {
     rafId = requestAnimationFrame(loop);

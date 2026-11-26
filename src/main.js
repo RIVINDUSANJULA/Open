@@ -1,5 +1,5 @@
 import './style.css';
-import { scene, camera, startLoop } from './scene.js';
+import { scene, camera, renderOnce, startLoop } from './scene.js';
 import { setupLights } from './lights.js';
 import { createCurtains } from './curtains.js';
 import { createRibbon } from './ribbon.js';
@@ -19,6 +19,13 @@ const scissors = createScissors(scene, camera, () => {
       window.location.href = 'http://localhost:3000';
     },
   });
+});
+
+renderOnce();
+
+const canvas = document.querySelector('#webgl-canvas');
+requestAnimationFrame(() => {
+  canvas?.classList.add('is-ready');
 });
 
 startLoop((elapsed) => {
