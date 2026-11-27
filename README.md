@@ -8,11 +8,11 @@ A Three.js and GSAP red velvet curtain and ribbon-cutting launch screen that ope
 
 ## Features
 
-- Procedural pleated velvet curtains using custom vertex displacement with sheen physical materials.
+- Procedural pleated red velvet curtains using custom vertex displacement with sheen physical materials.
 - Satin ribbon with resting catenary sag, ripple deformation, and two-half gravity fall physics.
 - Interactive 3D scissors with raycasting hover detection, invisible tap hitbox, idle floating animation, and keyboard support (Enter and Space keys).
 - Procedural Web Audio sound effects (synthesized metallic snip click and velvet slide whoosh) requiring zero external media assets.
-- Clean WebGL canvas fade-out that disconnects the render loop and hands over pointer events to the underlying site.
+- Transparent WebGL reveal over a black backdrop that disconnects the render loop and hands over pointer events to the underlying site.
 
 ## Tech Stack
 
@@ -104,19 +104,24 @@ Replace or edit `public/favicon.svg` with your preferred SVG icon.
 │   ├── scissors.js     # 3D scissors model, hit detection, and hover physics
 │   ├── sequence.js     # GSAP animation timeline for snip and curtain draw
 │   └── style.css       # Core styling and viewport resets
+├── CLA.md              # Contributor License Agreement
+├── CODE_OF_CONDUCT.md  # Contributor Code of Conduct
+├── CONTRIBUTING.md      # Development and contribution guide
 ├── index.html          # Base HTML template and critical dark styles
+├── LICENSE             # Apache License 2.0
+├── NOTICE              # Mandatory attribution notice
 ├── package.json        # Dependencies and build scripts
 └── vite.config.js      # Vite server configuration
 ```
 
 ## Contributing
 
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for branch naming, testing requirements, and submission processes, and review the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community standards.
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for branch naming, testing requirements, and submission processes, review [CLA.md](CLA.md) for licensing terms, and refer to [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community standards.
 
-## License & Attribution
+## License and Attribution
 
 This project is licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for the complete license text.
 
 - Mandatory Attribution: All uses (personal, educational, or commercial), forks, redistributions, and derivative works must retain attribution to **Rivindu Sanjula** as specified in the [NOTICE](NOTICE) file and preserve all per-file copyright and SPDX headers intact.
-- Enforcement & Compliance: Removing copyright notices, altering SPDX headers, or using this codebase without explicit attribution to Rivindu Sanjula terminates all rights granted under the Apache License 2.0, voiding the license and subjecting the user to statutory damages, copyright infringement claims, and DMCA takedown actions.
+- Enforcement and Compliance: Removing copyright notices, altering SPDX headers, or using this codebase without explicit attribution to Rivindu Sanjula terminates all rights granted under the Apache License 2.0, voiding the license and subjecting the unauthorized user to statutory damages, copyright infringement claims, and DMCA takedown actions.
 - Contributions: All contributions submitted to this project are governed by the terms in [CONTRIBUTING.md](CONTRIBUTING.md) and require agreement to the [CLA.md](CLA.md) Contributor License Agreement.
