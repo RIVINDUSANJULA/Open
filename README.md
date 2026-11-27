@@ -113,4 +113,6 @@ Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for br
 
 This project is licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for the complete license text.
 
-Per Section 4(d) of the Apache License 2.0, all derivative works, forks, and redistributions must retain original attribution to **Rivindu Sanjula** as specified in the [NOTICE](NOTICE) file.
+- Mandatory Attribution: All uses (personal, educational, or commercial), forks, redistributions, and derivative works must retain attribution to **Rivindu Sanjula** as specified in the [NOTICE](NOTICE) file and preserve all per-file copyright and SPDX headers intact.
+- Enforcement & Compliance: Removing copyright notices, altering SPDX headers, or using this codebase without explicit attribution to Rivindu Sanjula terminates all rights granted under the Apache License 2.0, voiding the license and subjecting the user to statutory damages, copyright infringement claims, and DMCA takedown actions.
+- Contributions: All contributions submitted to this project are governed by the terms in [CONTRIBUTING.md](CONTRIBUTING.md) and require agreement to the [CLA.md](CLA.md) Contributor License Agreement.
