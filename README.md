@@ -4,7 +4,11 @@ A Three.js and GSAP red velvet curtain and ribbon-cutting launch screen that ope
 
 ## Demo
 
-<!-- Drag and drop your demo .mp4 or .mov file here on GitHub to render the inline video player -->
+
+
+https://github.com/user-attachments/assets/b9e706e9-8a98-46e9-a005-ccff8accfbc8
+
+
 
 ## Features
 
