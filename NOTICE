@@ -1,10 +1,24 @@
 Three.js Curtain Reveal
-Copyright 2026 Rivindu Sanjula (https://github.com/RIVINDUSANJULA)
+Copyright (c) 2026 Rivindu Sanjula (https://github.com/RIVINDUSANJULA)
 
 This product includes software originally authored and created by
 Rivindu Sanjula (https://github.com/RIVINDUSANJULA).
 
-All derivative works, modifications, distributions, or redistributions
-of this software must retain this attribution notice and provide credit
-to the original author in accordance with Section 4(d) of the Apache
-License, Version 2.0.
+1. Mandatory Attribution Requirement
+Any redistribution, reproduction, fork, commercial deployment, or
+derivative work of this software, whether in source or binary form,
+must retain this NOTICE file, the LICENSE file, and all per-file
+copyright and SPDX headers intact and without alteration.
+
+2. Attribution Placement
+In user-facing products or deployments utilizing this software,
+attribution to Rivindu Sanjula must be included in either the
+documentation, about/credits screen, or accompanying metadata.
+
+3. Termination of License
+Use, modification, or redistribution of this software without
+preserving full attribution to Rivindu Sanjula terminates all rights
+and licenses granted under the Apache License, Version 2.0. Any
+continued use thereafter constitutes willful copyright infringement
+subject to statutory damages and legal enforcement under applicable
+copyright laws and international treaties.
