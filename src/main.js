@@ -16,6 +16,7 @@ const scissors = createScissors(scene, camera, () => {
     ribbon,
     curtains,
     onComplete: () => {
+      // Target destination after curtain animation completes
       window.location.href = 'http://localhost:3000';
     },
   });

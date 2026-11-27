@@ -1,8 +1,10 @@
 {
-  "name": "vite-test",
-  "version": "0.0.0",
+  "name": "threejs-curtain-reveal",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
+  "author": "Rivindu Sanjula",
+  "license": "Apache-2.0",
   "scripts": {
     "dev": "vite --port 5173 --strictPort",
     "build": "vite build",
