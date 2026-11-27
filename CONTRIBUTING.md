@@ -44,6 +44,18 @@ Before submitting a Pull Request, verify that your changes compile without error
    ```
    Ensure the build passes cleanly with zero errors.
 
+## Contributor License Agreement (CLA)
+
+All contributors must agree to the Contributor License Agreement before any Pull Request can be reviewed or merged.
+
+By submitting a contribution, you agree to grant Rivindu Sanjula the intellectual property licenses detailed in [CLA.md](CLA.md), enabling consolidated legal copyright enforcement across the project.
+
+To acknowledge agreement, add this exact statement to your Pull Request description:
+
+```text
+I have read and agree to the Contributor License Agreement in CLA.md.
+```
+
 ## Submitting a Pull Request
 
 1. Push your branch to your fork:
@@ -52,7 +64,16 @@ Before submitting a Pull Request, verify that your changes compile without error
    ```
 2. Open a Pull Request against the `main` branch of this repository.
 3. Describe the change clearly in the Pull Request description, detailing the motivation and testing performed.
+4. Verify your Pull Request satisfies the checklist below.
+
+### Pull Request Checklist
+
+Before submitting, confirm that:
+- [ ] You have included the CLA agreement statement in your PR description.
+- [ ] All per-file copyright and SPDX headers remain intact and unaltered in all modified or added source files.
+- [ ] New code follows existing architecture and code style.
+- [ ] `npm run build` succeeds locally with zero warnings or errors.
 
 ## Licensing of Contributions
 
-By submitting a Pull Request or contributing code, documentation, or assets to this project, you explicitly agree that your contributions are licensed under the terms of the Apache License, Version 2.0, as set forth in the LICENSE file of this repository, with original author attribution preserved according to the NOTICE file.
+By submitting a Pull Request or contributing code, documentation, or assets to this project, you explicitly agree that your contributions are licensed under the terms of the Apache License, Version 2.0, as set forth in the LICENSE file of this repository, with original author attribution preserved according to the NOTICE file and CLA.md.
