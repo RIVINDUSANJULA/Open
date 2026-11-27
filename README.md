@@ -2,6 +2,10 @@
 
 A Three.js and GSAP red velvet curtain and ribbon-cutting launch screen that opens onto a target web application.
 
+## Demo
+
+<!-- Drag and drop your demo .mp4 or .mov file here on GitHub to render the inline video player -->
+
 ## Features
 
 - Procedural pleated velvet curtains using custom vertex displacement with sheen physical materials.
